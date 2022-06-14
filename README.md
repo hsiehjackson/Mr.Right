@@ -3,7 +3,7 @@ Mr. Right is a novel retrieval dataset containing multimodal documents (images a
 
 For more details, please checkout our Mr. Right paper.
 
-![Mr. Right Dataset](https://github.com/hsiehjackson/Mr.Right/blob/master/Mr_Right_framework.png?raw=true)
+![Mr. Right Dataset](https://github.com/hsiehjackson/Mr.Right/blob/main/Mr_Right_framework.png?raw=true)
 
 ## Dataest
 * <a href="https://www.dropbox.com/s/0n1owj6cbj28c04/Mr_Right.tar.gz?dl=1"> Dataset json files</a>
@@ -122,7 +122,7 @@ python main.py --task train \
 ```
 
 ## Benchmark
-![Mr. Right Benchmark](https://github.com/hsiehjackson/Mr.Right/blob/master/benchmark.png?raw=true)
+![Mr. Right Benchmark](https://github.com/hsiehjackson/Mr.Right/blob/main/benchmark.png?raw=true)
 
 
 
