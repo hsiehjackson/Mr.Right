@@ -1,0 +1,101 @@
+model_name: 'METER'
+seed: 0
+checkpoint: 'checkpoints/meter_clip16_288_roberta_pretrain.ckpt' # Download from the original repository
+train_file: [
+              'data/multimodal_train_pairs.json'
+               ]
+val_file: [
+  'data/multimodal_val_queries.json'
+]
+test_file: [
+  'data/multimodal_test_queries.json'
+]
+document: [
+  'data/multimodal_val_documents.json'
+  # 'data/multimodal_documents.json'
+]
+image_root: '/data/chengping'
+bert_config: 'configs/config_bert.json'
+loss_names: {"itm": 0,
+              "mlm": 0,
+              "mpp": 0,
+              "vqa": 0,
+              "vcr": 0,
+              "vcr_qar": 0,
+              "nlvr2": 0,
+              "irtr": 0,
+              "contras": 0,
+              "snli": 0}
+temp: 0.07
+queue_size: 9600
+warm_up: True
+optimizer: {opt: adamW, lr: 5e-6, weight_decay: 0.02}
+schedular: {sched: cosine, lr: 5e-6, epochs: 200, min_lr: 1e-7, decay_rate: 1, warmup_lr: 5e-6, warmup_epochs: 1, cooldown_epochs: 0}
+gradient_clip_value: 0.5
+
+
+# Image setting
+train_transform_keys: ["clip_randaug"]
+val_transform_keys: ["clip"]
+image_res: 288
+image_size: 288
+max_image_len: -1
+patch_size: 16
+draw_false_image: 1
+image_only: False
+resolution_before: 224
+
+# Text Setting
+vqav2_label_size: 3129
+query_length: 40
+text_length: 128
+max_text_len: 128
+tokenizer: "roberta-base"
+text_encoder: "roberta-base"
+vocab_size: 50265
+whole_word_masking: False
+mlm_prob: 0.15
+draw_false_text: 0
+
+
+# Transformer Setting
+vit: 'ViT-B/16'
+input_image_embed_size: 768
+input_text_embed_size: 768
+hidden_size: 768
+embed_dim: 768
+num_heads: 12
+num_layers: 6
+mlp_ratio: 4
+drop_rate: 0.1
+num_top_layer: 6
+
+# Optimizer Setting
+optim_type: "adamw"
+learning_rate: 1e-5
+weight_decay: 0.01
+decay_power: 1
+max_epoch: 100
+max_steps: 100000
+warmup_steps: 10000
+end_lr: 0
+lr_mult: 1  # multiply lr for downstream heads
+
+# Downstream Setting
+get_recall_metric: False
+
+# PL Trainer Setting
+resume_from: None
+fast_dev_run: False
+val_check_interval: 1.0
+test_only: False
+
+# below params varies with the environment
+data_root: ""
+log_dir: "result"
+per_gpu_batchsize: 0  # you should define this manually with per_gpu_batch_size=#
+num_gpus: 1
+num_nodes: 1
+load_path: ""
+num_workers: 8
+precision: 16

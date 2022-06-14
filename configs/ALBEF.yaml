@@ -1,0 +1,35 @@
+model_name: 'ALBEF'
+checkpoint: 'checkpoints/ALBEF_4M.pth' # Download from the original repository
+train_file: [
+              'data/multimodal_train_pairs.json'
+            ]
+val_file: [
+  'data/multimodal_val_queries.json'
+]
+test_file: [
+  'data/multimodal_test_queries.json'
+]
+document: [
+  'data/multimodal_val_documents.json'
+  # 'data/multimodal_documents.json'
+]
+image_root: '/data/chengping'
+bert_config: 'configs/config_bert.json'
+text_encoder: "bert-base-uncased"
+
+seed: 42
+image_res: 384
+query_length: 40
+text_length: 40
+vision_width: 768
+hidden_size: 768
+embed_dim: 256
+queue_size: 9600
+temp: 0.07
+alpha: 0.4
+k_test: 256
+gradient_clip_value: 0.5
+
+warm_up: True
+optimizer: {opt: adamW, lr: 5e-6, weight_decay: 0.02}
+schedular: {sched: cosine, lr: 5e-6, epochs: 200, min_lr: 1e-7, decay_rate: 1, warmup_lr: 5e-6, warmup_epochs: 1, cooldown_epochs: 0}
