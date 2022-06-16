@@ -6,14 +6,14 @@ For more details, please checkout our Mr. Right paper.
 ![Mr. Right Dataset](https://github.com/hsiehjackson/Mr.Right/blob/main/Mr_Right_framework.png?raw=true)
 
 ## Dataest
-* <a href="https://www.dropbox.com/s/0n1owj6cbj28c04/Mr_Right.tar.gz?dl=1"> Dataset json files</a>
+* <a href="https://www.dropbox.com/s/jky5dvkn6nar8mc/Mr_Right.tar.gz?dl=1"> Dataset json files</a>
     * multimodal_documents.json
         * amount: 806,357
         * id: document id
         * title: document title
         * doc_text: document text
         * img_url: document image URL
-    * multimodal_train_pairs.json
+    * multimodal_pretrain_pairs.json
         * amount: 351,979
         * id: document id
         * title: document title

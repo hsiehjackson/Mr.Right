@@ -2,7 +2,7 @@ model_name: 'METER'
 seed: 0
 checkpoint: 'checkpoints/meter_clip16_288_roberta_pretrain.ckpt' # Download from the original repository
 train_file: [
-              'data/multimodal_train_pairs.json'
+              'data/multimodal_pretrain_pairs.json'
                ]
 val_file: [
   'data/multimodal_val_queries.json'

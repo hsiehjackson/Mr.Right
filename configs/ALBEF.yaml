@@ -1,7 +1,7 @@
 model_name: 'ALBEF'
 checkpoint: 'checkpoints/ALBEF_4M.pth' # Download from the original repository
 train_file: [
-              'data/multimodal_train_pairs.json'
+              'data/multimodal_pretrain_pairs.json'
             ]
 val_file: [
   'data/multimodal_val_queries.json'

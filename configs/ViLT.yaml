@@ -2,7 +2,7 @@ model_name: 'ViLT'
 seed: 0
 checkpoint: 'checkpoints/vilt_200k_mlm_itm.ckpt' # Download from the original repository
 train_file: [
-              'data/multimodal_train_pairs.json'
+              'data/multimodal_pretrain_pairs.json'
             ]
 val_file: [
   'data/multimodal_val_queries.json'
