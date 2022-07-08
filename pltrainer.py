@@ -534,6 +534,7 @@ class TextToMultiTrainer(pl.LightningModule):
         if self.local_rank == 0:
             # pdb.set_trace()
             print("Save pickle...")
+            output_dir = self.pickle_output
             with open('multimodal_documents.pickle', 'wb') as handle:
                 pickle.dump(all_docs, handle, protocol=pickle.HIGHEST_PROTOCOL)
             with open('img_query.pickle', 'wb') as handle:
@@ -544,7 +545,7 @@ class TextToMultiTrainer(pl.LightningModule):
                 pickle.dump(all_multi_queries, handle, protocol=pickle.HIGHEST_PROTOCOL)
             with open('labels.pickle', 'wb') as handle:
                 pickle.dump(all_queries_doc_ids, handle, protocol=pickle.HIGHEST_PROTOCOL)
-            pdb.set_trace()
+            print("Finish saving pickle. Now you can compute the score.")
         return {"img":True}
         
         img_sims_matrix = all_img_queries @ all_docs.t()

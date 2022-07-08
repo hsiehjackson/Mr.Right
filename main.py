@@ -95,7 +95,8 @@ if __name__ == '__main__':
     parser.add_argument("--mode", default="train", type=str,choices=['train','test'],help='choose your mode')
     parser.add_argument("--pretrain", default="ALBEF", type=str,choices=['ALBEF','ViLT','MDETR','METER'],help='choose pretrain work')
     parser.add_argument("--embeds_feats", default="avg", type=str,choices=['cls','avg','iavg_tcls'],help='how to deal with text and image embeddings')
-    parser.add_argument("--test_output", default="output.json", type=str)
+    parser.add_argument("--pickle_output", default="./", type=str,help='directory of testing pickle files')
+    parser.add_argument("--test_output", default="output.json", type=str,help='json files of testing result')
     parser.add_argument("--save_checkpoint", default="checkpoints", type=str)
     parser.add_argument('--pl_checkpoint', default=None,type=str,help='Load pytorch lightning checkpoint')
     parser.add_argument('--batch_size', type=int, default=32,help='The batch size of each dataloader')
@@ -103,7 +104,7 @@ if __name__ == '__main__':
     parser.add_argument('--shuffle', type=bool, default=True,help='Whether shuffle dataloader')
     parser.add_argument('--ctx_prediction', action='store_true', help='Whether do context prediction')
     parser.add_argument('--neg_matching', action='store_true', help='Whether do negative matching')
-    parser.add_argument('--neg_matchingv2', action='store_true', help='Whether do negative matching')
+    parser.add_argument('--neg_matchingv2', action='store_true', help='Whether do negative matching version2')
     parser.add_argument('--test_rank', default=10, type=int, help='Step1. Contrastive -> rank -> Step2. Matching')
     parser.add_argument('--re_ranking', action='store_true', help='Whether do re ranking for matching')
    

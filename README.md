@@ -72,9 +72,7 @@ bash download_dataset.sh
 ```
 
 ## Model Checkpoint
-* ALBEF
-* METER
-* ViLT
+We train our model based on <a href="https://github.com/salesforce/ALBEF"> ALBEF</a>, <a href="https://github.com/zdou0830/METER"> METER</a>, and <a href="https://github.com/dandelin/ViLT"> ViLT</a>. 
 ```bash=
 bash ./checkpoints/download_checkpoints.sh
 ```
@@ -87,6 +85,7 @@ bash ./checkpoints/download_checkpoints.sh
 * In configs/ALBEF.yaml, configs/METER.yaml, or ViLT.yaml set the paths for the json files and the image path.
 * In our task, there are large numbers of documents. To improve the efficiency of validation per training epoch, we suggest that you should split small numbers of doucments with multimodal_val_queries.json. Remember to reset the document id and set the document path in config file.
 ```bash=
+# dir root: data
 python extract_multimodal_val.py --mul_doc multimodal_documents.json \
 --mul_val multimodal_val_queries.json \ 
 --val_amount 10000 \ 
@@ -112,13 +111,23 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 --re_ranking
 ```
 ## Evaluate 
+We evaluate our models on a V100 32GB GPU. However, when we calculate the score of TR, IR, and MR simultaneously, the memory size is not enough. Therefore, we store the embeddings checkpoint and calculate the score seperately.
+
 ```bash=
-python main.py --task train \
---config configs/model_retrieval.yaml \
---batch_size 64 \ 
---num_workers 32 \ 
---shuffle True \ 
---checkpoint [Pretrained checkpoint] \
+# Run model
+CUDA_VISIBLE_DEVICES=0 python main.py \
+--num_gpus 1 \
+--mode test \
+--wandb_task_name [Name of task] \ 
+--pickle_output [Directory of testing pickle files] \
+--test_output [Json results of model] \
+--batch_size 128 \ 
+--pretrain [ALBEF | ViLT | METER] \ 
+--pl_checkpoint checkpoints/[ albef.ckpt | vilt.ckpt | meter.ckpt] \
+
+# Calculate the score
+python compute_pickle.py \
+--pickle_input [Embeddings of different retrieval tasks]
 ```
 
 ## Benchmark
