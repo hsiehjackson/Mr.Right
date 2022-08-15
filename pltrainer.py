@@ -3,6 +3,7 @@ import utils
 import json
 import pickle
 import torch
+import os
 import torch.nn.functional as F
 import torch.distributed as dist
 import pytorch_lightning as pl
@@ -532,18 +533,21 @@ class TextToMultiTrainer(pl.LightningModule):
         
         
         if self.local_rank == 0:
-            # pdb.set_trace()
-            print("Save pickle...")
-            output_dir = self.pickle_output
-            with open('multimodal_documents.pickle', 'wb') as handle:
+            output_dir = self.args.pickle_output
+            doc_path = os.path.join(output_dir,"multimodal_documents.pickle")
+            img_path = os.path.join(output_dir,"img_query.pickle")
+            txt_path = os.path.join(output_dir,"txt_query.pickle")
+            multi_path = os.path.join(output_dir,"multi_query.pickle")
+            labels_path = os.path.join(output_dir,"labels.pickle")
+            with open(doc_path, 'wb') as handle:
                 pickle.dump(all_docs, handle, protocol=pickle.HIGHEST_PROTOCOL)
-            with open('img_query.pickle', 'wb') as handle:
+            with open(img_path, 'wb') as handle:
                 pickle.dump(all_img_queries, handle, protocol=pickle.HIGHEST_PROTOCOL)
-            with open('txt_query.pickle', 'wb') as handle:
+            with open(txt_path, 'wb') as handle:
                 pickle.dump(all_txt_queries, handle, protocol=pickle.HIGHEST_PROTOCOL)
-            with open('multi_query.pickle', 'wb') as handle:
+            with open(multi_path, 'wb') as handle:
                 pickle.dump(all_multi_queries, handle, protocol=pickle.HIGHEST_PROTOCOL)
-            with open('labels.pickle', 'wb') as handle:
+            with open(labels_path, 'wb') as handle:
                 pickle.dump(all_queries_doc_ids, handle, protocol=pickle.HIGHEST_PROTOCOL)
             print("Finish saving pickle. Now you can compute the score.")
         return {"img":True}

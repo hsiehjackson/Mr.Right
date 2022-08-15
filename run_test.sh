@@ -1,1 +1,1 @@
-CUDA_VISIBLE_DEVICES=0 python main.py --num_gpus 1  --mode test --wandb_task_name "test" --test_output output_wiki_meter.json --batch_size 128 --pretrain METER --pl_checkpoint checkpoints/meter.ckpt
+CUDA_VISIBLE_DEVICES=0 python main.py --num_gpus 1  --mode test --wandb_task_name "test" --pickle_output "Fine_tune_model_auto" --test_output output_wiki_meter.json --batch_size 128 --pretrain METER --pl_checkpoint checkpoints/meter.ckpt

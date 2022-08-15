@@ -1,7 +1,7 @@
 import pickle
 import os
 from argparse import ArgumentParser
-from metric import score_v2
+from metric import score
 
 def main(args):
     print("Load pickle...")
@@ -31,17 +31,17 @@ def main(args):
     print(f"Mixed query size: {all_multi_queries.shape}")
 
     img_sims_matrix = all_img_queries @ all_docs.t()
-    img_output_score = score_v2(img_sims_matrix,all_queries_doc_ids)
+    img_output_score = score(img_sims_matrix,all_queries_doc_ids)
     print(f"IR score:{img_output_score}")
     del img_sims_matrix
 
     txt_sims_matrix = all_txt_queries @ all_docs.t()
-    txt_output_score = score_v2(txt_sims_matrix,all_queries_doc_ids)
+    txt_output_score = score(txt_sims_matrix,all_queries_doc_ids)
     print(f"TR score:{txt_output_score}")
     del txt_sims_matrix
 
     multi_sims_matrix = all_multi_queries @ all_docs.t()
-    multi_output_score = score_v2(multi_sims_matrix,all_queries_doc_ids)
+    multi_output_score = score(multi_sims_matrix,all_queries_doc_ids)
     print(f"MR score:{multi_output_score}")
 
 if __name__ == '__main__':

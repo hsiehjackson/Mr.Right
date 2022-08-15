@@ -11,8 +11,7 @@ test_file: [
   'data/multimodal_test_queries.json'
 ]
 document: [
-  'data/multimodal_val_documents.json'
-  # 'data/multimodal_documents.json'
+  'data/multimodal_documents.json'
 ]
 image_root: '/data/chengping'
 bert_config: 'configs/config_bert.json'
